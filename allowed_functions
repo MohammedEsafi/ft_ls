@@ -1,0 +1,8 @@
+write
+opendir : opens the directory file, and mallocs one "struct dirent"
+readdir : reads the next directory entry into that one "struct dirent", and returns a pointer to it.
+closedir : closes the directory file, and free's the "struct dirent".
+stat : check file permissions, size, creation and modification date of a file
+lstat
+getpwuid: search the user database for an entry with a matching uid
+getgrgid: search the group database for an entry with a matching gid
