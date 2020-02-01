@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:01:04 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/01 15:12:07 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/01 15:22:37 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int		compare_string(char *str1, char *str2)
 	return (0);
 }
 
-int		compare_time(struct stat stat1, struct stat stat2)
+int		compare_time(t_datum *d1, t_datum *d2)
 {
-	if (stat1.st_mtime < stat2.st_mtime)
+	if (d1->stat.st_mtime < d2->stat.st_mtime)
 		return (0);
 	return (1);
 }
@@ -42,7 +42,9 @@ int		ft_opt_sort(void **list, int i, int j, unsigned int *options)
 	if (options == NULL)
 		return (compare_string(list[i], list[j]));
 	else if (*options & TIME)
-		return (compare_time(((t_datum *)list[i])->stat, ((t_datum *)list[j])->stat));
+		return (compare_time((t_datum *)list[i], (t_datum *)list[j]));
+	else
+		return (compare_string(((t_datum *)list[i])->filename, ((t_datum *)list[j])->filename));
 	return (0);
 }
 

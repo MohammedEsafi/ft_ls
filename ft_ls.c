@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:13:56 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/01 14:48:33 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/01 15:23:26 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	ft_print_listdir(t_listdir *listdir)
 
 void	ft_reader(t_listdir *listdir, int first_time)
 {
-	// DIR		*d;
-
 	ft_merge_sort(listdir, 0, listdir->book.cursor);
 	ft_print_listdir(listdir);
 
