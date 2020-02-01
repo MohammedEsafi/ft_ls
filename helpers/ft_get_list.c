@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:10:35 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/01 11:53:51 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/01 12:40:44 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_not_found_list(t_listdir *not_found)
 	ft_merge_sort(not_found, 0, not_found->book.cursor);
 	while (++i <= not_found->book.cursor)
 	{
-		ft_printf("ls: %s: No such file or directory\n", not_found->book.list[i]);
+		ft_printf("ft_ls: %s: No such file or directory\n", not_found->book.list[i]);
 	}
 }
 

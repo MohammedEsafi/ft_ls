@@ -6,13 +6,13 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:01:04 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/01 11:53:20 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/01 15:12:07 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
 
-int		compare_strings(char *str1, char *str2)
+int		compare_string(char *str1, char *str2)
 {
 	int		i;
 
@@ -30,10 +30,19 @@ int		compare_strings(char *str1, char *str2)
 	return (0);
 }
 
+int		compare_time(struct stat stat1, struct stat stat2)
+{
+	if (stat1.st_mtime < stat2.st_mtime)
+		return (0);
+	return (1);
+}
+
 int		ft_opt_sort(void **list, int i, int j, unsigned int *options)
 {
 	if (options == NULL)
-		return (compare_strings(list[i], list[j]));
+		return (compare_string(list[i], list[j]));
+	else if (*options & TIME)
+		return (compare_time(((t_datum *)list[i])->stat, ((t_datum *)list[j])->stat));
 	return (0);
 }
 
