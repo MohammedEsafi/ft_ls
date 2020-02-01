@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/01/31 15:59:37 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/01 11:29:42 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 */
 
 # define FT_LS_H
+
+# define TRUE 1
 
 # define LIST 1U
 # define REVERSE 2U
@@ -51,7 +53,7 @@ typedef struct	s_datum
 typedef struct	s_listdir
 {
 	char			*parent;
-	t_stack			elements;
+	unsigned int	*options;
 	t_array_list	book;
 }				t_listdir;
 
@@ -60,5 +62,7 @@ typedef struct	s_listdir
 */
 
 unsigned int	ft_options(unsigned int *options, char **argv, int len);
+void			ft_get_list(char **argv, int len, t_listdir *listdir);
+void			ft_merge_sort(t_listdir *listdir, int left, int right);
 
 #endif
