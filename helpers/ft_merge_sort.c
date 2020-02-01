@@ -6,45 +6,51 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:01:04 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/01 15:22:37 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/01 17:56:26 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
 
-int		compare_string(char *str1, char *str2)
+int		compare_string(char *str1, char *str2, unsigned int opt)
 {
 	int		i;
+	int		answer;
 
 	i = 0;
+	answer = !(opt & REVERSE);
 	while (TRUE)
 	{
 		if (str1[i] < str2[i])
-			return (1);
+			return (answer);
 		else if (str1[i] > str2[i])
-			return (0);
+			return (!answer);
 		if (str1[i] == '\0' || str2[i] == '\0')
 			break ;
 		++i;
 	}
-	return (0);
+	return (!answer);
 }
 
-int		compare_time(t_datum *d1, t_datum *d2)
+int		compare_time(t_datum *d1, t_datum *d2, unsigned int opt)
 {
+	int		answer;
+
+	answer = !(opt & REVERSE);
 	if (d1->stat.st_mtime < d2->stat.st_mtime)
-		return (0);
-	return (1);
+		return (!answer);
+	return (answer);
 }
 
 int		ft_opt_sort(void **list, int i, int j, unsigned int *options)
 {
 	if (options == NULL)
-		return (compare_string(list[i], list[j]));
+		return (compare_string(list[i], list[j], *options));
 	else if (*options & TIME)
-		return (compare_time((t_datum *)list[i], (t_datum *)list[j]));
+		return (compare_time((t_datum *)list[i], (t_datum *)list[j], *options));
 	else
-		return (compare_string(((t_datum *)list[i])->filename, ((t_datum *)list[j])->filename));
+		return (compare_string(((t_datum *)list[i])->filename,
+					((t_datum *)list[j])->filename, *options));
 	return (0);
 }
 

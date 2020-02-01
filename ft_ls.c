@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:13:56 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/01 15:23:26 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/01 15:47:29 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 void	ft_print_listdir(t_listdir *listdir)
 {
 	int		i;
+	t_datum	*p;
 
 	i = -1;
 	while (++i <= listdir->book.cursor)
 	{
-		ft_printf("%s\n", ((t_datum *)(listdir->book.list[i]))->filename);
+		p = (t_datum *)(listdir->book.list[i]);
+		if (S_ISREG(p->stat.st_mode))
+			ft_printf("%s\t\t", p->filename);
+		// else
+		// 	// push
 	}
+	ft_printf("\n\n");
+	ft_printf("jkhkn");
 }
 
 void	ft_reader(t_listdir *listdir, int first_time)
