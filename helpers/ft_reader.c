@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 11:32:19 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/02 13:20:47 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ t_listdir	*new_listdir(char *path, t_listdir *p_listdir, int bulb)
 		}
 	}
 	else
-		perror("");
-	closedir(dir);
+		perror("ft_ls: ");
+	if (dir != NULL)
+		closedir(dir);
 	return (listdir);
 }
 
