@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:10:35 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 10:01:21 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/02 10:09:08 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ static void	ft_not_found_list(t_listdir *not_found)
 	}
 }
 
+static void	no_arg_case(t_listdir *listdir)
+{
+	t_datum			*element;
+
+	element = (t_datum *)malloc(sizeof(t_datum));
+	lstat(".", &(element->stat));
+	element->filename = (char *)malloc(2);
+	ft_memcpy(element->filename, ".", 2);
+	append(&(listdir->book), element);
+}
+
 void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 {
 	int				i;
@@ -31,11 +42,14 @@ void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 	t_listdir		not_found_list;
 
 	i = -1;
+	listdir->parent = NULL;
 	if (mark < 1 || mark == argc)
+	{
+		no_arg_case(listdir);
 		return ;
+	}
 	init_array_list(&(not_found_list.book));
 	not_found_list.options = NULL;
-	listdir->parent = NULL;
 	while (++i < argc - mark)
 	{
 		element = (t_datum *)malloc(sizeof(t_datum));

@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:13:56 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 10:01:13 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/02 10:27:45 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char		*ft_join_path(char *parent, char *child)
 	return (full_path);
 }
 
-t_listdir	*new_listdir(char *path, unsigned int *opt)
+t_listdir	*new_listdir(char *path, t_listdir *p_listdir, int bulb)
 {
 	t_listdir		*listdir;
 	char			*full_path;
@@ -45,14 +45,15 @@ t_listdir	*new_listdir(char *path, unsigned int *opt)
 
 	listdir = (t_listdir *)malloc(sizeof(t_listdir));
 	listdir->parent = path;
-	listdir->options = opt;
-	ft_printf("\n%s:\n", path);
+	listdir->options = p_listdir->options;
+	if (!(bulb == TRUE && p_listdir->book.cursor == 0))
+		ft_printf("\n%s:\n", path);
 	init_array_list(&(listdir->book));
 	if ((dir = opendir(path)))
 	{
 		while ((dirent = readdir(dir)) != NULL)
 		{
-			if (!(*opt & ALL) && (dirent->d_name)[0] == '.')
+			if (!(*(p_listdir->options) & ALL) && (dirent->d_name)[0] == '.')
 				continue ;
 			full_path = ft_join_path(path, dirent->d_name);
 			element = (t_datum *)malloc(sizeof(t_datum));
@@ -69,7 +70,7 @@ t_listdir	*new_listdir(char *path, unsigned int *opt)
 	return (listdir);
 }
 
-void	ft_print_listdir(t_listdir *listdir)
+void	ft_print_listdir(t_listdir *listdir, int bulb)
 {
 	int		i;
 	t_datum	*datum;
@@ -78,8 +79,15 @@ void	ft_print_listdir(t_listdir *listdir)
 	while (++i <= listdir->book.cursor)
 	{
 		datum = (t_datum *)(listdir->book.list[i]);
-		// if (S_ISREG(p->stat.st_mode))
-		ft_printf("‣ %s\n", datum->filename);
+		if (bulb == TRUE)
+		{
+			if (S_ISREG(datum->stat.st_mode))
+				ft_printf("‣ %s\n", datum->filename);
+		}
+		else
+		{
+			ft_printf("‣ %s\n", datum->filename);
+		}
 	}
 }
 
@@ -90,13 +98,13 @@ void	ft_reader(t_listdir *listdir, int bulb)
 
 	i = -1;
 	ft_merge_sort(listdir, 0, listdir->book.cursor);
-	ft_print_listdir(listdir);
+	ft_print_listdir(listdir, bulb);
 	if (bulb == TRUE || *(listdir->options) & RECURSIVE)
 		while (++i <= listdir->book.cursor)
 		{
 			datum = (t_datum *)(listdir->book.list[i]);
 			if (S_ISDIR(datum->stat.st_mode))
-				ft_reader(new_listdir(ft_join_path(listdir->parent, datum->filename), listdir->options), FALSE);
+				ft_reader(new_listdir(ft_join_path(listdir->parent, datum->filename), listdir, bulb), FALSE);
 		}
 }
 
@@ -109,10 +117,7 @@ int		main(int argc, char **argv)
 	listdir = (t_listdir *)malloc(sizeof(t_listdir));
 	init_array_list(&(listdir->book));
 	i = ft_options(&options, argv, argc);
-	if (i < 1 || i == (unsigned int)argc)
-		ft_printf(".\n");
-	else
-		ft_get_list(&argv[i], argc, i, listdir);
+	ft_get_list(&argv[i], argc, i, listdir);
 	listdir->options = &options;
 	ft_reader(listdir, TRUE);
 	return (0);
