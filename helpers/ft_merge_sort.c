@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:01:04 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/01 18:43:20 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/02 11:11:05 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		compare_time(t_datum *d1, t_datum *d2, unsigned int opt)
 int		ft_opt_sort(void **list, int i, int j, unsigned int *options)
 {
 	if (options == NULL)
-		return (compare_string(list[i], list[j], *options));
+		return (compare_string(list[i], list[j], 0));
 	else if (*options & TIME)
 		return (compare_time((t_datum *)list[i], (t_datum *)list[j], *options));
 	else

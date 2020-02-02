@@ -6,13 +6,13 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:10:35 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 10:09:08 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/02 11:04:53 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
 
-static void	ft_not_found_list(t_listdir *not_found)
+static void	ft_error(t_listdir *not_found)
 {
 	int		i;
 
@@ -64,5 +64,5 @@ void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 			append(&(listdir->book), element);
 		}
 	}
-	ft_not_found_list(&not_found_list);
+	ft_error(&not_found_list);
 }

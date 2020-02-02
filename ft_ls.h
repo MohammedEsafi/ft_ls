@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 09:58:56 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/02 11:20:56 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ typedef struct	s_listdir
 int				ft_options(unsigned int *options, char **argv, int len);
 void			ft_get_list(char **argv, int argc, int mark, t_listdir *listdir);
 void			ft_merge_sort(t_listdir *listdir, int left, int right);
+void			ft_reader(t_listdir *listdir, int bulb);
 
 #endif

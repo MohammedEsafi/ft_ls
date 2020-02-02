@@ -6,7 +6,7 @@
 #    By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/20 13:51:29 by mesafi            #+#    #+#              #
-#    Updated: 2020/01/31 20:02:58 by mesafi           ###   ########.fr        #
+#    Updated: 2020/02/02 11:20:09 by mesafi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ HEADER		= ft_ls.h
 OBJS		= ft_ls.o \
 				helpers/ft_options.o \
 				helpers/ft_get_list.o \
-				helpers/ft_merge_sort.o
+				helpers/ft_merge_sort.o \
+				helpers/ft_reader.o
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
