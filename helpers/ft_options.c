@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 19:24:07 by mesafi            #+#    #+#             */
-/*   Updated: 2020/01/31 10:25:52 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/02 09:58:46 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static void		ft_get_opt(char *str, unsigned int *opt)
 	}
 }
 
-unsigned int	ft_options(unsigned int *options, char **argv, int len)
+int	ft_options(unsigned int *options, char **argv, int len)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
-	while (++i < (unsigned int)len && argv[i][0] == '-')
+	while (++i < len && argv[i][0] == '-')
 	{
 		if (argv[i][1] == '-')
 			return (++i);

@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/01 15:26:56 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/02 09:58:56 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define FT_LS_H
 
 # define TRUE 1
+# define FALSE 0
 
 # define LIST 1U
 # define REVERSE 2U
@@ -35,10 +36,11 @@
 # include "libft/libft.h"
 # include "libft/stack/stack.h"
 # include "libft/array_list/array_list.h"
-// # include <dirent.h>
+# include <dirent.h>
 // # include <sys/types.h>
 # include <sys/stat.h>
 # include <unistd.h>
+# include <stdio.h>
 // # include <time.h>
 
 /*
@@ -62,8 +64,8 @@ typedef struct	s_listdir
  ** ft_ls Functions
 */
 
-unsigned int	ft_options(unsigned int *options, char **argv, int len);
-void			ft_get_list(char **argv, int len, t_listdir *listdir);
+int				ft_options(unsigned int *options, char **argv, int len);
+void			ft_get_list(char **argv, int argc, int mark, t_listdir *listdir);
 void			ft_merge_sort(t_listdir *listdir, int left, int right);
 
 #endif

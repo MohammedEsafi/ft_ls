@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:10:35 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/01 12:40:44 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/02 10:01:21 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,19 @@ static void	ft_not_found_list(t_listdir *not_found)
 	}
 }
 
-void		ft_get_list(char **argv, int len, t_listdir *listdir)
+void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 {
 	int				i;
 	t_datum			*element;
 	t_listdir		not_found_list;
 
 	i = -1;
+	if (mark < 1 || mark == argc)
+		return ;
 	init_array_list(&(not_found_list.book));
 	not_found_list.options = NULL;
 	listdir->parent = NULL;
-	while (++i < len)
+	while (++i < argc - mark)
 	{
 		element = (t_datum *)malloc(sizeof(t_datum));
 		if (lstat(argv[i], &(element->stat)) == -1)

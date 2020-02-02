@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 22:38:58 by mesafi            #+#    #+#             */
-/*   Updated: 2020/01/20 13:31:12 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/01 19:53:28 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ size_t	ft_strlen(const char *str)
 	size_t	len;
 
 	len = 0;
-	while (str[len])
-		len++;
+	if (str)
+		while (str[len])
+			len++;
 	return (len);
 }
