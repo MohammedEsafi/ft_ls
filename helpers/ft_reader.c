@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reader.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 13:20:47 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/03 03:05:42 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,15 @@ t_listdir	*new_listdir(char *path, t_listdir *p_listdir, int bulb)
 
 int		ft_print_listdir(t_listdir *listdir, int bulb)
 {
-	int		i;
-	int		printed;
-	t_datum	*datum;
+	int			i;
+	int			printed;
+	t_datum		*datum;
+	size_t		*max_lenght;
 
 	i = -1;
 	printed = 0;
+	max_lenght = (size_t *)ft_memalloc(sizeof(size_t) * 7);
+	((LIST && listdir->options)) && (max_lenght = find_max_lenght(listdir, max_lenght));
 	while (++i <= listdir->book.cursor)
 	{
 		datum = (t_datum *)(listdir->book.list[i]);
@@ -86,13 +89,20 @@ int		ft_print_listdir(t_listdir *listdir, int bulb)
 		{
 			if (!S_ISDIR(datum->stat.st_mode))
 			{
-				ft_printf("‣ %s\n", datum->filename);
+				if ((LIST && listdir->options) || (FLAG_G && listdir->options))
+					ft_print_flag_list(listdir, max_lenght, i);
+				else
+					ft_print_flag_non_list(listdir, datum);
 				++printed;
 			}
 		}
 		else
 		{
-			ft_printf("‣ %s\n", datum->filename);
+			printf("%d\n", (LIST && listdir->options));
+			if ((LIST && listdir->options) || (FLAG_G && listdir->options))
+				ft_print_flag_list(listdir, max_lenght, i);
+			else
+				ft_print_flag_non_list(listdir, datum);
 		}
 	}
 	return (printed);
@@ -105,7 +115,8 @@ void	ft_reader(t_listdir *listdir, int bulb)
 	int		printed;
 
 	i = -1;
-	ft_merge_sort(listdir, 0, listdir->book.cursor);
+	if (!(FLAG_F && listdir->options))
+		ft_merge_sort(listdir, 0, listdir->book.cursor);
 	printed = ft_print_listdir(listdir, bulb);
 	if (bulb == TRUE || *(listdir->options) & RECURSIVE)
 		while (++i <= listdir->book.cursor)

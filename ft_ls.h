@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 11:20:56 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/03 02:59:40 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 # define ALL 4U
 # define RECURSIVE 8U
 # define TIME 16U
+# define FLAG_F 32
+# define FLAG_G 64
 
-# define OPTS "lRrat"
+# define OPTS "lRratfg"
 
 /*
  ** Includes
@@ -39,9 +41,15 @@
 # include <dirent.h>
 // # include <sys/types.h>
 # include <sys/stat.h>
+#include <sys/ioctl.h>
+#include <curses.h>
+#include <term.h>
+# include <sys/types.h>
 # include <unistd.h>
+# include <grp.h>
+# include <pwd.h>
 # include <stdio.h>
-// # include <time.h>
+# include <time.h>
 
 /*
  ** Structures
@@ -68,5 +76,8 @@ int				ft_options(unsigned int *options, char **argv, int len);
 void			ft_get_list(char **argv, int argc, int mark, t_listdir *listdir);
 void			ft_merge_sort(t_listdir *listdir, int left, int right);
 void			ft_reader(t_listdir *listdir, int bulb);
+int				ft_print_flag_list(t_listdir *listdir, size_t *max_lenght, int i);
+size_t			*find_max_lenght(t_listdir *listdir, size_t *max_lenght);
+void			ft_print_flag_non_list(t_listdir *listdir, t_datum *datum);
 
 #endif

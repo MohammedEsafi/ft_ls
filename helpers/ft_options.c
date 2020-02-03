@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 19:24:07 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 09:58:46 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/03 01:43:34 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ static void		ft_get_opt(char *str, unsigned int *opt)
 			*opt |= REVERSE;
 		else if (str[i] == 't')
 			*opt |= TIME;
+		else if (str[i] == 'f')
+			*opt |= FLAG_F;
+		else if (str[i] == 'g')
+			*opt |= FLAG_G;
 	}
 }
 
