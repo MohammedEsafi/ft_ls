@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_flag_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 00:15:43 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/03 01:46:53 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/03 11:44:02 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,17 +111,17 @@ static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght, t_listdir
 	ft_printf("%-*s  ", max_lenght[2], group_name->gr_name);
 	if (S_ISCHR(datum->stat.st_mode) || S_ISBLK(datum->stat.st_mode))
 	{
-		ft_printf("%*d, ", max_lenght[5], major(datum->stat.st_rdev));
-		ft_printf("%*d ", max_lenght[6], minor(datum->stat.st_rdev));
+		ft_printf("%*d, ", max_lenght[4], major(datum->stat.st_rdev));
+		ft_printf("%*d ", max_lenght[5], minor(datum->stat.st_rdev));
 	}
 	else
 		ft_printf("%*d ", max_lenght[3], (int)datum->stat.st_size);
 	buff_time = ctime(&datum->stat.st_ctime);
 	buff_time[16] = '\0';
 	ft_printf("%s ", buff_time + 4);
-	if (!(S_ISLNK(datum->stat.st_mode) && (readlink(listdir->parent, buff_link, 1024) > 0)))
+	if (!S_ISLNK(datum->stat.st_mode) || (readlink(ft_join_path(listdir->parent, datum->filename), buff_link, 1024) == -1))
 		ft_printf("%-s\n", datum->filename);
-	if (S_ISLNK(datum->stat.st_mode) && (readlink(listdir->parent, buff_link, 1024) > 0))
+	else
 		ft_printf("%-s -> %s\n", datum->filename, buff_link);
 	free(buff_link);
 }

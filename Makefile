@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+         #
+#    By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/20 13:51:29 by mesafi            #+#    #+#              #
-#    Updated: 2020/02/03 03:06:40 by aalhaoui         ###   ########.fr        #
+#    Updated: 2020/02/03 10:28:02 by mesafi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,7 @@ OBJS		= ft_ls.o \
 				helpers/ft_get_list.o \
 				helpers/ft_merge_sort.o \
 				helpers/ft_reader.o \
-				helpers/ft_print_flag_list.o \
-				helpers/ft_print_flag.o
+				helpers/ft_print_flag_list.o
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
