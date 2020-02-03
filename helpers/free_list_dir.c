@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   free_list_dir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/29 14:13:56 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 21:43:55 by mesafi           ###   ########.fr       */
+/*   Created: 2020/02/02 21:46:22 by mesafi            #+#    #+#             */
+/*   Updated: 2020/02/03 13:18:16 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "../ft_ls.h"
 
-int		main(int argc, char **argv)
+void	free_list_dir(t_listdir *listdir)
 {
-	unsigned int	options;
-	unsigned int	i;
-	t_listdir		*listdir;
+	int		i;
+	t_datum	*item;
 
-	listdir = (t_listdir *)malloc(sizeof(t_listdir));
-	init_array_list(&(listdir->book));
-	i = ft_options(&options, argv, argc);
-	ft_get_list(&argv[i], argc, i, listdir);
-	listdir->options = &options;
-	ft_reader(listdir, TRUE);
-	return (0);
+	free(listdir->parent);
+	i = -1;
+	while (++i <= listdir->book.cursor)
+	{
+		item = listdir->book.list[i];
+		free(item->filename);
+		free(item);
+	}
+	free(listdir->book.list);
+	free(listdir);
 }

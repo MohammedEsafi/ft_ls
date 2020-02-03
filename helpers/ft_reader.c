@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 13:20:47 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/03 13:19:11 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		ft_print_listdir(t_listdir *listdir, int bulb)
 		{
 			if (!S_ISDIR(datum->stat.st_mode))
 			{
+				
 				ft_printf("‣ %s\n", datum->filename);
 				++printed;
 			}
@@ -107,7 +108,7 @@ void	ft_reader(t_listdir *listdir, int bulb)
 	i = -1;
 	ft_merge_sort(listdir, 0, listdir->book.cursor);
 	printed = ft_print_listdir(listdir, bulb);
-	if (bulb == TRUE || *(listdir->options) & RECURSIVE)
+	if (bulb == TRUE || (*(listdir->options) & RECURSIVE))
 		while (++i <= listdir->book.cursor)
 		{
 			datum = (t_datum *)(listdir->book.list[i]);
@@ -118,4 +119,5 @@ void	ft_reader(t_listdir *listdir, int bulb)
 				ft_reader(new_listdir(ft_join_path(listdir->parent, datum->filename), listdir, bulb), FALSE);
 			}
 		}
+	free_list_dir(listdir);
 }

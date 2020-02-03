@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:10:35 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 11:04:53 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/03 13:21:06 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	ft_error(t_listdir *not_found)
 	{
 		ft_printf("ft_ls: %s: No such file or directory\n", not_found->book.list[i]);
 	}
+	free_array_list(&(not_found->book));
 }
 
 static void	no_arg_case(t_listdir *listdir)
@@ -60,7 +61,7 @@ void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 		}
 		else
 		{
-			element->filename = argv[i];
+			element->filename = ft_strdup(argv[i]);
 			append(&(listdir->book), element);
 		}
 	}
