@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 23:42:38 by mesafi            #+#    #+#             */
-/*   Updated: 2020/01/26 09:45:47 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/04 09:29:53 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void			ft_memdel(void **ap);
 void			*ft_memchr(const void *str, int c, size_t n);
 int				ft_memcmp(const void *str1, const void *str2, size_t n);
 void			ft_bzero(void *s, size_t n);
+char			*ft_strndup(const char *s1, int len);
 
 /*
  ** Linked List Functions

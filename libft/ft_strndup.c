@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/29 14:13:56 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/04 13:26:28 by mesafi           ###   ########.fr       */
+/*   Created: 2020/02/04 09:28:33 by mesafi            #+#    #+#             */
+/*   Updated: 2020/02/04 09:31:47 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int		main(int argc, char **argv)
+char	*ft_strndup(const char *s1, int len)
 {
-	unsigned int	options;
-	unsigned int	i;
-	t_listdir		*listdir;
+	char	*sdup;
 
-	listdir = (t_listdir *)malloc(sizeof(t_listdir));
-	init_array_list(&(listdir->book));
-	i = ft_options(&options, argv, argc);
-	ft_get_list(&argv[i], argc, i, listdir);
-	listdir->options = &options;
-	listdir->max_lenght = NULL;
-	ft_reader(listdir, TRUE);
-	return (0);
+	sdup = (char *)malloc((len + 1) * sizeof(char));
+	if (!sdup)
+		return (NULL);
+	ft_memcpy(sdup, s1, len);
+	sdup[len] = '\0';
+	return (sdup);
 }

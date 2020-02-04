@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 21:47:32 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/04 19:01:56 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@
 # define ALL 4U
 # define RECURSIVE 8U
 # define TIME 16U
+# define FLAG_F 32U
+# define FLAG_G 64U
+# define FLAG_D 128U
 
-# define OPTS "lRrat"
+# define OPTS "lRratfgd"
 
 /*
  ** Includes
@@ -39,9 +42,15 @@
 # include <dirent.h>
 // # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/ioctl.h>
+# include <curses.h>
+# include <term.h>
+# include <sys/types.h>
 # include <unistd.h>
+# include <grp.h>
+# include <pwd.h>
 # include <stdio.h>
-// # include <time.h>
+# include <time.h>
 
 /*
  ** Structures
@@ -57,6 +66,7 @@ typedef struct	s_listdir
 {
 	char			*parent;
 	unsigned int	*options;
+	size_t			*max_lenght;
 	t_array_list	book;
 }				t_listdir;
 
@@ -69,5 +79,8 @@ void			ft_get_list(char **argv, int argc, int mark, t_listdir *listdir);
 void			ft_merge_sort(t_listdir *listdir, int left, int right);
 void			ft_reader(t_listdir *listdir, int bulb);
 void			free_list_dir(t_listdir *listdir);
+int				ft_print_flag_list(t_listdir *listdir, size_t *max_lenght, int i);
+size_t			*find_max_lenght(t_listdir *listdir);
+char			*ft_join_path(char *parent, char *child);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 19:24:07 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 09:58:46 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/03 20:03:15 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ static void		ft_get_opt(char *str, unsigned int *opt)
 			*opt |= REVERSE;
 		else if (str[i] == 't')
 			*opt |= TIME;
+		else if (str[i] == 'f')
+			*opt |= FLAG_F;
+		else if (str[i] == 'g')
+			*opt |= FLAG_G;
+		else if (str[i] == 'd')
+			*opt |= FLAG_D;
 	}
 }
 
