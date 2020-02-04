@@ -6,7 +6,7 @@
 #    By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/20 13:51:29 by mesafi            #+#    #+#              #
-#    Updated: 2020/02/02 21:47:51 by mesafi           ###   ########.fr        #
+#    Updated: 2020/02/03 18:28:55 by mesafi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,10 @@ OBJS		= ft_ls.o \
 				helpers/ft_get_list.o \
 				helpers/ft_merge_sort.o \
 				helpers/ft_reader.o \
-				helpers/free_list_dir.o
+				helpers/free_list_dir.o \
+				helpers/find_max_lenght.o \
+				helpers/ft_print_flag_list.o \
+				helpers/ft_join_path.o
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
