@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/04 19:38:11 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/04 20:11:14 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static t_listdir	*new_listdir(char *path, char *filename,
 	listdir->options = p_listdir->options;
 	if (!(bulb == TRUE && p_listdir->book.cursor == 0))
 		ft_printf("%s:\n", path);
+	
 	init_array_list(&(listdir->book));
 	if ((dir = opendir(path)))
 	{
@@ -42,9 +43,14 @@ static t_listdir	*new_listdir(char *path, char *filename,
 		{
 			if (!(*(p_listdir->options) & ALL) && (dirent->d_name)[0] == '.')
 				continue ;
-			full_path = ft_join_path(path, dirent->d_name);
 			element = (t_datum *)malloc(sizeof(t_datum));
-			lstat(full_path, &(element->stat));
+			full_path = ft_join_path(path, dirent->d_name);
+			if (lstat(full_path, &(element->stat)) == -1)
+			{
+				free(element);
+				free(full_path);
+				continue ;
+			}
 			free(full_path);
 			element->filename = (char *)malloc(dirent->d_namlen + 1);
 			ft_memcpy(element->filename, dirent->d_name, dirent->d_namlen + 1);
