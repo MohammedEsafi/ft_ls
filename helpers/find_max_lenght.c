@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:24:00 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/03 20:04:47 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/05 19:49:27 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static size_t		*find_max_lenght_second_part(size_t *max_lenght, t_datum *datum)
 	return (max_lenght);
 }
 
-size_t		*find_max_lenght(t_listdir *listdir)
+size_t		*find_max_lenght(t_listdir *listdir, int bulb)
 {
 	t_datum			*datum;
 	struct group	*group_name;
@@ -65,5 +65,7 @@ size_t		*find_max_lenght(t_listdir *listdir)
 	if ((max_lenght[4] != 0 || max_lenght[5] != 0) &&
 		max_lenght[3] < max_lenght[4] + max_lenght[5] + 2)
 		max_lenght[3] = max_lenght[4] + max_lenght[5] + 2;
+	if (!bulb)
+		ft_printf("total %d\n", max_lenght[6]);
 	return (max_lenght);
 }

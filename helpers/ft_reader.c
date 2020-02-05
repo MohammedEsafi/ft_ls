@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/04 20:11:14 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/05 19:43:14 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void			ft_router(t_listdir *listdir, t_datum *datum, int i)
 	if ((LIST | FLAG_G) & *listdir->options)
 		ft_print_flag_list(listdir, listdir->max_lenght, i);
 	else
-		printf("%s\n", datum->filename);
+		printf("-> %s\n", datum->filename);
 }
 
 static t_listdir	*new_listdir(char *path, char *filename,
@@ -35,7 +35,6 @@ static t_listdir	*new_listdir(char *path, char *filename,
 	listdir->options = p_listdir->options;
 	if (!(bulb == TRUE && p_listdir->book.cursor == 0))
 		ft_printf("%s:\n", path);
-	
 	init_array_list(&(listdir->book));
 	if ((dir = opendir(path)))
 	{
@@ -76,16 +75,16 @@ static int			ft_print_listdir(t_listdir *listdir, int bulb)
 	i = -1;
 	printed = 0;
 	if ((LIST | FLAG_G) & *listdir->options)
-		listdir->max_lenght = find_max_lenght(listdir);
+		listdir->max_lenght = find_max_lenght(listdir, bulb);
 	while (++i <= listdir->book.cursor)
 	{
 		datum = (t_datum *)(listdir->book.list[i]);
 		if (bulb == TRUE)
 		{
-			// (S_ISLNK(datum->stat.st_mode) && LIST & *listdir->options &&
-			// 	datum->filename[ft_strlen(datum->filename) - 1] == '/')
 			if (!S_ISDIR(datum->stat.st_mode) || (*listdir->options & FLAG_D))
 			{
+				if (S_ISLNK(datum->stat.st_mode) && !(LIST & *listdir->options ))
+					continue ;
 				ft_router(listdir, datum, i);
 				++printed;
 			}
@@ -114,7 +113,10 @@ void				ft_reader(t_listdir *listdir, int bulb)
 		while (++i <= listdir->book.cursor)
 		{
 			datum = (t_datum *)(listdir->book.list[i]);
-			if (S_ISDIR(datum->stat.st_mode))
+			if (S_ISDIR(datum->stat.st_mode) || (LIST & *listdir->options &&
+				S_ISLNK(datum->stat.st_mode) &&
+				datum->filename[ft_strlen(datum->filename) - 1] == '/') ||
+				(!(LIST & *listdir->options) && S_ISLNK(datum->stat.st_mode)))
 			{
 				if (printed != 0)
 					ft_printf("\n");
