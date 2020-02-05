@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/05 19:43:14 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/05 21:06:54 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,21 @@ static int			ft_print_listdir(t_listdir *listdir, int bulb)
 	return (printed);
 }
 
+int					is_link(char *parent, char *filename)
+{
+	char			*buff_link;
+	struct stat		stat;
+	int				ret;
+
+	buff_link = (char *)malloc(sizeof(char) * 1024);
+	ret = readlink(ft_join_path(parent, filename), buff_link, 1024);
+	lstat(buff_link, &stat);
+	printf("%d\n", stat.st_nlink);
+	if (S_ISLNK(stat.st_mode))
+		return (0);
+	return (1);
+}
+
 void				ft_reader(t_listdir *listdir, int bulb)
 {
 	int		i;
@@ -115,7 +130,8 @@ void				ft_reader(t_listdir *listdir, int bulb)
 			datum = (t_datum *)(listdir->book.list[i]);
 			if (S_ISDIR(datum->stat.st_mode) || (LIST & *listdir->options &&
 				S_ISLNK(datum->stat.st_mode) &&
-				datum->filename[ft_strlen(datum->filename) - 1] == '/') ||
+				datum->filename[ft_strlen(datum->filename) - 1] == '/' &&
+				is_link(listdir->parent, datum->filename)) ||
 				(!(LIST & *listdir->options) && S_ISLNK(datum->stat.st_mode)))
 			{
 				if (printed != 0)
