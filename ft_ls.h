@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/05 19:43:12 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/05 21:38:02 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 typedef struct	s_datum
 {
 	char			*filename;
+	char			*path;
 	struct stat		stat;
 }				t_datum;
 

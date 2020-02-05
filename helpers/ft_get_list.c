@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:10:35 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/04 20:31:41 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/05 21:55:48 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 		else
 		{
 			element->filename = ft_strdup(argv[i]);
+			element->path = ft_strdup(argv[i]);
 			append(&(listdir->book), element);
 		}
 	}

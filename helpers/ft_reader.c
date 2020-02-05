@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/05 21:06:54 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/05 22:00:12 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_listdir	*new_listdir(char *path, char *filename,
 				free(full_path);
 				continue ;
 			}
-			free(full_path);
+			element->path = full_path;
 			element->filename = (char *)malloc(dirent->d_namlen + 1);
 			ft_memcpy(element->filename, dirent->d_name, dirent->d_namlen + 1);
 			append(&(listdir->book), element);
@@ -101,13 +101,26 @@ static int			ft_print_listdir(t_listdir *listdir, int bulb)
 int					is_link(char *parent, char *filename)
 {
 	char			*buff_link;
+	char			*path;
+	char			*tmp;
 	struct stat		stat;
-	int				ret;
+	size_t			len;
 
-	buff_link = (char *)malloc(sizeof(char) * 1024);
-	ret = readlink(ft_join_path(parent, filename), buff_link, 1024);
+	len = ft_strlen(filename);
+	if (filename[len - 1] == '/')
+	{
+		tmp = ft_strndup(filename, len - 1);
+		path = ft_join_path(parent, tmp);
+		free(tmp);
+	}
+	else
+	{
+		path = ft_join_path(parent, filename);
+	}
+	buff_link = (char *)ft_memalloc(sizeof(char) * 1024);
+	if (readlink(path, buff_link, 1024) == -1)
+		return (1);
 	lstat(buff_link, &stat);
-	printf("%d\n", stat.st_nlink);
 	if (S_ISLNK(stat.st_mode))
 		return (0);
 	return (1);
