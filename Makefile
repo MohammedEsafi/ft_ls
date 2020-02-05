@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+         #
+#    By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/20 13:51:29 by mesafi            #+#    #+#              #
-#    Updated: 2020/02/03 18:28:55 by mesafi           ###   ########.fr        #
+#    Updated: 2020/02/05 04:18:54 by aalhaoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,10 @@ OBJS		= ft_ls.o \
 				helpers/free_list_dir.o \
 				helpers/find_max_lenght.o \
 				helpers/ft_print_flag_list.o \
-				helpers/ft_join_path.o
+				helpers/ft_join_path.o \
+				helpers/ft_print_flag.o
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -ltermcap
 
 # Colors
 BLACK		= \033[30m
