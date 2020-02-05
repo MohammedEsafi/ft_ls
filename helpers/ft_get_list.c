@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:10:35 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/04 19:01:47 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/04 20:31:41 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 		element = (t_datum *)malloc(sizeof(t_datum));
 		if (lstat(argv[i], &(element->stat)) == -1)
 		{
-			append(&(not_found_list.book), argv[i]);
+			append(&(not_found_list.book), ft_strdup(argv[i]));
 			free(element);
 		}
 		else
