@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/05 11:04:14 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/05 11:13:55 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ void			free_list_dir(t_listdir *listdir);
 int				ft_print_flag_list(t_listdir *listdir, size_t *max_lenght, int i);
 size_t			*find_max_lenght(t_listdir *listdir);
 char			*ft_join_path(char *parent, char *child);
+int				ft_print_flag_non_list(int x, int y, t_listdir *listdir, int i);
+int				*ft_get_parameter(t_listdir *listdir);
 
 #endif
