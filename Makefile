@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+         #
+#    By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/20 13:51:29 by mesafi            #+#    #+#              #
-#    Updated: 2020/02/05 04:18:54 by aalhaoui         ###   ########.fr        #
+#    Updated: 2020/02/06 10:02:42 by mesafi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ OBJS		= ft_ls.o \
 				helpers/find_max_lenght.o \
 				helpers/ft_print_flag_list.o \
 				helpers/ft_join_path.o \
-				helpers/ft_print_flag.o
+				helpers/ft_print_flag.o \
+				helpers/cursor_first_pos.o
 CC			= gcc
 CFLAGS		= -ltermcap
 

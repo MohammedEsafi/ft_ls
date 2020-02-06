@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/05 21:38:02 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/06 11:10:37 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,18 @@ typedef struct	s_listdir
 	t_array_list	book;
 }				t_listdir;
 
+typedef struct	s_col
+{
+	int 		x;
+	int			y;
+	int			index;
+	int			last_index;
+	int			*max_row_col;
+	int			tmp;
+	int			tmp1;
+}				t_col;
+
+
 /*
  ** ft_ls Functions
 */
@@ -85,5 +97,6 @@ size_t			*find_max_lenght(t_listdir *listdir, int bulb);
 char			*ft_join_path(char *parent, char *child);
 int				ft_print_flag_non_list(int x, int y, t_listdir *listdir, int i);
 int				*ft_get_parameter(t_listdir *listdir);
+int				cursor_first_pos(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_flag.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 03:40:55 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/05 09:04:26 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/06 11:42:58 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static	size_t	find_max_lenght_of_files(t_listdir *listdir)
 		if (result < lenght)
 			result = lenght;
 	}
-	return (result);
+	return (result + 1);
 }
 
 int			*ft_get_parameter(t_listdir *listdir)

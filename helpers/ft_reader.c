@@ -6,18 +6,35 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/05 22:00:12 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/06 11:59:14 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
 
-static void			ft_router(t_listdir *listdir, t_datum *datum, int i)
+static void			ft_router(t_listdir *listdir, t_datum *datum, int i,
+					t_col *d)
 {
 	if ((LIST | FLAG_G) & *listdir->options)
 		ft_print_flag_list(listdir, listdir->max_lenght, i);
 	else
-		printf("-> %s\n", datum->filename);
+	{
+		(d->index > listdir->book.cursor) && (d->index = ++d->last_index);
+		d->tmp = ft_print_flag_non_list(d->x, d->y, listdir, d->index);
+		d->index += d->max_row_col[1];
+		if (d->x == (d->max_row_col[3]) * d->max_row_col[2])
+		{
+			if (d->y + d->tmp1 == d->max_row_col[4])
+				d->max_row_col[3] -= 1;
+			d->x = 0;
+			if (d->tmp != -1)
+				(d->y)++;
+			else
+				(d->tmp1)++;
+		}
+		else
+			d->x += d->max_row_col[2];
+	}
 }
 
 static t_listdir	*new_listdir(char *path, char *filename,
@@ -40,7 +57,7 @@ static t_listdir	*new_listdir(char *path, char *filename,
 	{
 		while ((dirent = readdir(dir)) != NULL)
 		{
-			if (!(*(p_listdir->options) & ALL) && (dirent->d_name)[0] == '.')
+			if (!(*(p_listdir->options) & (ALL | FLAG_F)) && (dirent->d_name)[0] == '.')
 				continue ;
 			element = (t_datum *)malloc(sizeof(t_datum));
 			full_path = ft_join_path(path, dirent->d_name);
@@ -66,14 +83,27 @@ static t_listdir	*new_listdir(char *path, char *filename,
 	return (listdir);
 }
 
+static void			int_t_col(t_col *data, t_listdir *listdir)
+{
+	data->x = 0;
+	data->y = cursor_first_pos();
+	data->index = 0;
+	data->last_index = 0;
+	data->max_row_col = ft_get_parameter(listdir);
+	data->tmp = 0;
+	data->tmp1 = 0;
+}
+
 static int			ft_print_listdir(t_listdir *listdir, int bulb)
 {
 	int			i;
 	int			printed;
 	t_datum		*datum;
+	t_col		data;
 
 	i = -1;
 	printed = 0;
+	int_t_col(&data, listdir);
 	if ((LIST | FLAG_G) & *listdir->options)
 		listdir->max_lenght = find_max_lenght(listdir, bulb);
 	while (++i <= listdir->book.cursor)
@@ -85,16 +115,18 @@ static int			ft_print_listdir(t_listdir *listdir, int bulb)
 			{
 				if (S_ISLNK(datum->stat.st_mode) && !(LIST & *listdir->options ))
 					continue ;
-				ft_router(listdir, datum, i);
+				ft_router(listdir, datum, i, &data);
 				++printed;
 			}
 		}
 		else
 		{
-			ft_router(listdir, datum, i);
+			ft_router(listdir, datum, i, &data);
 			printed = 1;
 		}
 	}
+	if (!((LIST | FLAG_G) & *listdir->options) && printed != 0)
+		write(1, "\n", 1);
 	return (printed);
 }
 

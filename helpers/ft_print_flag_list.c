@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 00:15:43 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/05 11:14:27 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/06 10:51:44 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght, t_listdir
 	buff_time = ctime(&datum->stat.st_ctime);
 	buff_time[16] = '\0';
 	ft_printf("%s ", buff_time + 4);
-	if (!S_ISLNK(datum->stat.st_mode) || (readlink(ft_join_path(listdir->parent, datum->filename), buff_link, 1024) == -1))
+	if (!S_ISLNK(datum->stat.st_mode) || (readlink(datum->path, buff_link, 1024) == -1))
 		ft_printf("%-s\n", datum->filename);
 	else
 		ft_printf("%-s -> %s\n", datum->filename, buff_link);
