@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/06 11:10:37 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/06 15:33:20 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@
 # define FLAG_F 32U
 # define FLAG_G 64U
 # define FLAG_D 128U
+# define FLAG_1 256U
+# define COLOR 512U
 
-# define OPTS "lRratfgd"
+# define OPTS "lRGratfgd1"
 
+# define RESET "\033[0m"
 /*
  ** Includes
 */
@@ -92,7 +95,8 @@ void			ft_get_list(char **argv, int argc, int mark, t_listdir *listdir);
 void			ft_merge_sort(t_listdir *listdir, int left, int right);
 void			ft_reader(t_listdir *listdir, int bulb);
 void			free_list_dir(t_listdir *listdir);
-int				ft_print_flag_list(t_listdir *listdir, size_t *max_lenght, int i);
+int				ft_print_flag_list(t_listdir *listdir, size_t *max_lenght,
+					int i, char *color);
 size_t			*find_max_lenght(t_listdir *listdir, int bulb);
 char			*ft_join_path(char *parent, char *child);
 int				ft_print_flag_non_list(int x, int y, t_listdir *listdir, int i);

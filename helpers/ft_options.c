@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 19:24:07 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/03 20:03:15 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/06 15:15:18 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		ft_get_opt(char *str, unsigned int *opt)
 			exit(2);
 		}
 		if (str[i] == 'l')
-			*opt |= LIST;
+			*opt = (*opt & ~FLAG_1) | LIST;
 		else if (str[i] == 'R')
 			*opt |= RECURSIVE;
 		else if (str[i] == 'a')
@@ -41,6 +41,10 @@ static void		ft_get_opt(char *str, unsigned int *opt)
 			*opt |= FLAG_G;
 		else if (str[i] == 'd')
 			*opt |= FLAG_D;
+		else if (str[i] == '1')
+			*opt = (*opt & ~LIST) | FLAG_1;
+		else if (str[i] == 'G')
+			*opt |= COLOR;
 	}
 }
 

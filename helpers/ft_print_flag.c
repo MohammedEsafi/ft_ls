@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 03:40:55 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/06 11:42:58 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/06 15:33:12 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		ft_print_flag_non_list(int x, int y, t_listdir *listdir, int i)
 	(y > last_y) && (last_y = y);
 	ft_putstr_fd(tgoto(tgetstr("cm", NULL), x, y), 1);
 	write(1, datum->filename, ft_strlen(datum->filename));
+	ft_printf("%s%s", datum->filename, RESET);
 	if ((last_y == (window.ws_row - 1)) && (x == max_row_col[3] * max_row_col[2]))
 	{
 		ret = -1;

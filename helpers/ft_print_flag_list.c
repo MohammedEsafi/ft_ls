@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 00:15:43 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/06 10:51:44 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/06 16:06:21 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void		ft_print_file_mode(t_datum *datum)
 	free(str);
 }
 
-static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght, t_listdir *listdir)
+static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght,
+					t_listdir *listdir, char *color)
 {
 	struct group	*group_name;
 	struct passwd	*user_name;
@@ -65,18 +66,19 @@ static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght, t_listdir
 	buff_time[16] = '\0';
 	ft_printf("%s ", buff_time + 4);
 	if (!S_ISLNK(datum->stat.st_mode) || (readlink(datum->path, buff_link, 1024) == -1))
-		ft_printf("%-s\n", datum->filename);
+		ft_printf("%s%-s%s\n", color, datum->filename, RESET);
 	else
-		ft_printf("%-s -> %s\n", datum->filename, buff_link);
+		ft_printf("%s%-s%s -> %s\n", color, datum->filename, RESET, buff_link);
 	free(buff_link);
 }
 
-int			ft_print_flag_list(t_listdir *listdir, size_t *max_lenght, int i)
+int			ft_print_flag_list(t_listdir *listdir, size_t *max_lenght, int i,
+			char *color)
 {
 	t_datum		*datum;
 
 	datum = (t_datum *)(listdir->book.list[i]);
 	ft_print_file_mode(datum);
-	ft_print_link_usr_grp(datum, max_lenght, listdir);
+	ft_print_link_usr_grp(datum, max_lenght, listdir, color);
 	return (1);
 }
