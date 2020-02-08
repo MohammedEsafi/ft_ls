@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_flag_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 00:15:43 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/06 16:06:21 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/08 11:46:23 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,29 @@ static void		ft_print_file_mode(t_datum *datum)
 	free(str);
 }
 
+static	void	ft_print_time(t_datum *datum)
+{
+	char			*buff_time;
+	unsigned int	six_month;
+	char			*buff;
+
+	six_month = 15724800;
+	if (six_month < time(NULL) - datum->stat.st_mtime)
+	{
+		buff_time = ctime(&datum->stat.st_ctime);
+		buff = ft_strsub(buff_time, 20, 4);
+		buff_time[10] = '\0';
+		ft_printf("%s %5s ", buff_time + 4, buff);
+		ft_strdel(&buff);
+	}
+	else
+	{
+		buff_time = ctime(&datum->stat.st_ctime);
+		buff_time[16] = '\0';
+		ft_printf("%s ", buff_time + 4);
+	}
+}
+
 static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght,
 					t_listdir *listdir, char *color)
 {
@@ -46,7 +69,7 @@ static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght,
 	char			*buff_time;
 	char			*buff_link;
 
-	buff_link = (char *)malloc(sizeof(char) * 1024);
+	buff_link = (char *)ft_memalloc(sizeof(char) * 1024);
 	ft_printf("%*d ", max_lenght[0], (int)datum->stat.st_nlink);
 	if (!(FLAG_G & *listdir->options))
 	{
@@ -62,9 +85,7 @@ static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght,
 	}
 	else
 		ft_printf("%*d ", max_lenght[3], (int)datum->stat.st_size);
-	buff_time = ctime(&datum->stat.st_ctime);
-	buff_time[16] = '\0';
-	ft_printf("%s ", buff_time + 4);
+	ft_print_time(datum);
 	if (!S_ISLNK(datum->stat.st_mode) || (readlink(datum->path, buff_link, 1024) == -1))
 		ft_printf("%s%-s%s\n", color, datum->filename, RESET);
 	else

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+         #
+#    By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/20 13:51:29 by mesafi            #+#    #+#              #
-#    Updated: 2020/02/06 10:02:42 by mesafi           ###   ########.fr        #
+#    Updated: 2020/02/08 11:00:30 by aalhaoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ OBJS		= ft_ls.o \
 				helpers/ft_print_flag_list.o \
 				helpers/ft_join_path.o \
 				helpers/ft_print_flag.o \
-				helpers/cursor_first_pos.o
+				helpers/cursor_first_pos.o \
+				helpers/ft_get_color.o
 CC			= gcc
 CFLAGS		= -ltermcap
 

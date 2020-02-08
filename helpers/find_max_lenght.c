@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_max_lenght.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:24:00 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/05 19:49:27 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/08 11:58:33 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ size_t		*find_max_lenght(t_listdir *listdir, int bulb)
 		find_max_lenght_second_part(max_lenght, datum);
 		max_lenght[6] += datum->stat.st_blocks;
 	}
-	if ((max_lenght[4] != 0 || max_lenght[5] != 0) &&
-		max_lenght[3] < max_lenght[4] + max_lenght[5] + 2)
+	if (max_lenght[3] <= max_lenght[4] + max_lenght[5])
 		max_lenght[3] = max_lenght[4] + max_lenght[5] + 2;
 	if (!bulb)
 		ft_printf("total %d\n", max_lenght[6]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/06 15:33:20 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/08 11:00:15 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@
 # define FLAG_D 128U
 # define FLAG_1 256U
 # define COLOR 512U
+# define FLAG_M 1024U
 
-# define OPTS "lRGratfgd1"
+# define OPTS "lRGratfgdm1"
 
 # define RESET "\033[0m"
 /*
@@ -99,8 +100,9 @@ int				ft_print_flag_list(t_listdir *listdir, size_t *max_lenght,
 					int i, char *color);
 size_t			*find_max_lenght(t_listdir *listdir, int bulb);
 char			*ft_join_path(char *parent, char *child);
-int				ft_print_flag_non_list(int x, int y, t_listdir *listdir, int i);
+int				ft_print_flag_non_list(t_listdir *listdir, int i, t_col *d, char *color);
 int				*ft_get_parameter(t_listdir *listdir);
 int				cursor_first_pos(void);
+char			*ft_get_color(t_datum *datum, int opt);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_flag.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 03:40:55 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/06 15:33:12 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/08 11:03:26 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,21 @@ int			*ft_get_parameter(t_listdir *listdir)
 	return (max_row_col);
 }
 
-int		ft_print_flag_non_list(int x, int y, t_listdir *listdir, int i)
+int		ft_print_flag_non_list(t_listdir *listdir, int i, t_col *d, char *color)
 {
 	static int 		last_y;
 	static int 		all_av;
 	struct winsize	window;
-	int			*max_row_col;
 	t_datum		*datum;
 	static int 		ret;
 
 	datum = (t_datum *)(listdir->book.list[i]);
 	ioctl(1, TIOCGWINSZ, &window);
 	all_av++;
-	max_row_col = ft_get_parameter(listdir);
-	(y > last_y) && (last_y = y);
-	ft_putstr_fd(tgoto(tgetstr("cm", NULL), x, y), 1);
-	write(1, datum->filename, ft_strlen(datum->filename));
-	ft_printf("%s%s", datum->filename, RESET);
-	if ((last_y == (window.ws_row - 1)) && (x == max_row_col[3] * max_row_col[2]))
+	(d->y > last_y) && (last_y = d->y);
+	ft_putstr_fd(tgoto(tgetstr("cm", NULL), d->x, d->y), 1);
+	ft_printf("%s%s%s", color, datum->filename, RESET);
+	if ((last_y == (window.ws_row - 1)) && (d->x == d->max_row_col[3] * d->max_row_col[2]))
 	{
 		ret = -1;
 		ft_putchar('\n');

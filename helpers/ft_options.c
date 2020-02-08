@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_options.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 19:24:07 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/06 15:15:18 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/08 11:10:34 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
+
+static void		ft_usage(char ch)
+{
+	ft_printf("ls: illegal option -- %c\n", ch);
+	ft_printf("usage: ls [-%s] [file ...]\n", OPTS);
+	exit(2);
+}
 
 static void		ft_get_opt(char *str, unsigned int *opt)
 {
@@ -20,11 +27,7 @@ static void		ft_get_opt(char *str, unsigned int *opt)
 	while (str[++i])
 	{
 		if (ft_strchr(OPTS, str[i]) == NULL)
-		{
-			ft_printf("ls: illegal option -- %c\n", str[i]);
-			ft_printf("usage: ls [-%s] [file ...]\n", OPTS);
-			exit(2);
-		}
+			ft_usage(str[i]);
 		if (str[i] == 'l')
 			*opt = (*opt & ~FLAG_1) | LIST;
 		else if (str[i] == 'R')
@@ -45,6 +48,8 @@ static void		ft_get_opt(char *str, unsigned int *opt)
 			*opt = (*opt & ~LIST) | FLAG_1;
 		else if (str[i] == 'G')
 			*opt |= COLOR;
+		else if (str[i] == 'm')
+			*opt |= FLAG_M;
 	}
 }
 
@@ -55,8 +60,10 @@ int	ft_options(unsigned int *options, char **argv, int len)
 	i = 0;
 	while (++i < len && argv[i][0] == '-')
 	{
-		if (argv[i][1] == '-')
+		if (argv[i][1] == '-' && argv[i][1] == '\0')
 			return (++i);
+		else if (argv[i][1] == '-')
+			ft_usage('-');
 		ft_get_opt(argv[i], options);
 	}
 	return (i);
