@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reader.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/09 14:18:45 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/09 21:40:58 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static t_listdir	*new_listdir(char *path, char *filename,
 	return (listdir);
 }
 
-static void			int_t_col(t_col *data, t_listdir *listdir)
+static void			init_t_col(t_col *data, t_listdir *listdir)
 {
 	data->x = 0;
 	data->y = cursor_first_pos();
@@ -121,7 +121,8 @@ static int			ft_print_listdir(t_listdir *listdir, int bulb)
 
 	i = -1;
 	printed = 0;
-	int_t_col(&data, listdir);
+	if (!(LIST | FLAG_G | FLAG_1 | FLAG_M) & *listdir->options)
+		init_t_col(&data, listdir);
 	if ((LIST | FLAG_G) & *listdir->options)
 		listdir->max_lenght = find_max_lenght(listdir, bulb);
 	while (++i <= listdir->book.cursor)
