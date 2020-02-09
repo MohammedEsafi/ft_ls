@@ -6,7 +6,7 @@
 /*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/08 11:48:34 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/09 14:18:45 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,7 @@ int					is_link(char *parent, char *filename)
 		free(tmp);
 	}
 	else
-	{
 		path = ft_join_path(parent, filename);
-	}
 	buff_link = (char *)ft_memalloc(sizeof(char) * 1024);
 	if (readlink(path, buff_link, 1024) == -1)
 		return (1);
@@ -191,11 +189,13 @@ void				ft_reader(t_listdir *listdir, int bulb)
 		while (++i <= listdir->book.cursor)
 		{
 			datum = (t_datum *)(listdir->book.list[i]);
-			if (S_ISDIR(datum->stat.st_mode) || (LIST & *listdir->options &&
+			if ((S_ISDIR(datum->stat.st_mode) || (LIST & *listdir->options &&
 				S_ISLNK(datum->stat.st_mode) &&
 				datum->filename[ft_strlen(datum->filename) - 1] == '/' &&
 				is_link(listdir->parent, datum->filename)) ||
 				(!(LIST & *listdir->options) && S_ISLNK(datum->stat.st_mode)))
+				&& ((!ft_strequ(datum->filename, ".") &&
+					!ft_strequ(datum->filename, "..")) || bulb))
 			{
 				if (printed != 0)
 					ft_printf("\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:13:56 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/05 13:18:47 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/09 14:25:08 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ int		main(int argc, char **argv)
 	unsigned int	i;
 	t_listdir		*listdir;
 	char			*termtype;
-	int				success;
 
 	termtype = getenv("TERM");
-	success = tgetent(NULL, termtype);
+	tgetent(NULL, termtype);
 	listdir = (t_listdir *)malloc(sizeof(t_listdir));
 	init_array_list(&(listdir->book));
 	i = ft_options(&options, argv, argc);

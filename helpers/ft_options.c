@@ -6,7 +6,7 @@
 /*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 19:24:07 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/08 11:10:34 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/09 14:16:13 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	ft_options(unsigned int *options, char **argv, int len)
 	i = 0;
 	while (++i < len && argv[i][0] == '-')
 	{
-		if (argv[i][1] == '-' && argv[i][1] == '\0')
+		if (ft_strequ(argv[i], "-"))
+			return (i);
+		else if (ft_strequ(argv[i], "--"))
 			return (++i);
-		else if (argv[i][1] == '-')
-			ft_usage('-');
 		ft_get_opt(argv[i], options);
 	}
 	return (i);
