@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 23:42:38 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/04 09:29:53 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/09 22:34:29 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void			ft_putlst(t_list *head);
 */
 
 int				ft_printf(const char *format, ...);
+int				ft_dprintf(int fd, const char *format, ...);
 int				get_next_line(const int fd, char **line);
 void			ft_del(void *src, size_t len);
 

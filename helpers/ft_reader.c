@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/09 21:40:58 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/09 23:15:37 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,22 @@ static void			ft_router(t_listdir *listdir, t_datum *datum, int i,
 					t_col *d)
 {
 	char	*color;
+	char	*rest;
 
+	rest = (*listdir->options & COLOR) ? "\033[0m" : "\0";
 	if ((LIST | FLAG_G | FLAG_1 | FLAG_M) & *listdir->options)
 		color = ft_get_color(datum, *listdir->options);
 	if (FLAG_M & *listdir->options)
 	{
 		if (i != listdir->book.cursor)
-			ft_printf("%s%s, %s", color, datum->filename, RESET);
+			ft_printf("%s%s, %s", color, datum->filename, rest);
 		else
-			ft_printf("%s%s%s", color, datum->filename, RESET);
+			ft_printf("%s%s%s", color, datum->filename, rest);
 	}
 	else if ((LIST | FLAG_G) & *listdir->options)
 		ft_print_flag_list(listdir, listdir->max_lenght, i, color);
 	else if (FLAG_1 & *listdir->options)
-		ft_printf("%s%s%s\n", color, datum->filename, RESET);
+		ft_printf("%s%s%s\n", color, datum->filename, rest);
 	else
 	{
 		(d->index > listdir->book.cursor) && (d->index = ++d->last_index);
@@ -93,7 +95,7 @@ static t_listdir	*new_listdir(char *path, char *filename,
 	}
 	else
 	{
-		ft_printf("ft_ls: %s: ", filename);
+		ft_dprintf(2 ,"ft_ls: %s: ", filename);
 		perror("");
 	}
 	if (dir != NULL)
@@ -121,7 +123,7 @@ static int			ft_print_listdir(t_listdir *listdir, int bulb)
 
 	i = -1;
 	printed = 0;
-	if (!(LIST | FLAG_G | FLAG_1 | FLAG_M) & *listdir->options)
+	if (!((LIST | FLAG_G | FLAG_1 | FLAG_M) & *listdir->options))
 		init_t_col(&data, listdir);
 	if ((LIST | FLAG_G) & *listdir->options)
 		listdir->max_lenght = find_max_lenght(listdir, bulb);
@@ -193,8 +195,7 @@ void				ft_reader(t_listdir *listdir, int bulb)
 			if ((S_ISDIR(datum->stat.st_mode) || (LIST & *listdir->options &&
 				S_ISLNK(datum->stat.st_mode) &&
 				datum->filename[ft_strlen(datum->filename) - 1] == '/' &&
-				is_link(listdir->parent, datum->filename)) ||
-				(!(LIST & *listdir->options) && S_ISLNK(datum->stat.st_mode)))
+				is_link(listdir->parent, datum->filename)))
 				&& ((!ft_strequ(datum->filename, ".") &&
 					!ft_strequ(datum->filename, "..")) || bulb))
 			{

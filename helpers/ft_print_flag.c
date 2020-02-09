@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_flag.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 03:40:55 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/09 14:12:55 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/09 22:08:06 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ int		ft_print_flag_non_list(t_listdir *listdir, int i, t_col *d, char *color)
 	ft_putstr_fd(tgoto(tgetstr("cm", NULL), d->x, d->y), 1);
 	ft_printf("%s%s%s", color, datum->filename, RESET);
 	if ((last_y == (window.ws_row - 1)) &&
-		(d->x == d->max_row_col[3] * d->max_row_col[2])
-		&& (i != listdir->book.cursor))
+		(d->x == d->max_row_col[3] * d->max_row_col[2]))
 	{
 		ret = -1;
 		ft_putchar('\n');
