@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 03:40:55 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/09 22:08:06 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/09 23:19:04 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_print_flag_non_list(t_listdir *listdir, int i, t_col *d, char *color)
 	static int 		last_y;
 	static int 		all_av;
 	struct winsize	window;
-	t_datum		*datum;
+	t_datum			*datum;
 	static int 		ret;
 
 	datum = (t_datum *)(listdir->book.list[i]);
@@ -63,9 +63,11 @@ int		ft_print_flag_non_list(t_listdir *listdir, int i, t_col *d, char *color)
 	all_av++;
 	(d->y > last_y) && (last_y = d->y);
 	ft_putstr_fd(tgoto(tgetstr("cm", NULL), d->x, d->y), 1);
-	ft_printf("%s%s%s", color, datum->filename, RESET);
+	ft_printf("%s%s%s", color, datum->filename, (*listdir->options & COLOR) ?
+			"\033[0m" : "\0");
 	if ((last_y == (window.ws_row - 1)) &&
-		(d->x == d->max_row_col[3] * d->max_row_col[2]))
+		(d->x == d->max_row_col[3] * d->max_row_col[2])
+		&& (i != listdir->book.cursor))
 	{
 		ret = -1;
 		ft_putchar('\n');

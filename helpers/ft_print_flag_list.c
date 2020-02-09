@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_flag_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 00:15:43 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/08 11:46:23 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/09 23:18:30 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght,
 	struct passwd	*user_name;
 	char			*buff_time;
 	char			*buff_link;
+	char	*rest;
 
+	rest = (*listdir->options & COLOR) ? "\033[0m" : "\0";
 	buff_link = (char *)ft_memalloc(sizeof(char) * 1024);
 	ft_printf("%*d ", max_lenght[0], (int)datum->stat.st_nlink);
 	if (!(FLAG_G & *listdir->options))
@@ -87,9 +89,9 @@ static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght,
 		ft_printf("%*d ", max_lenght[3], (int)datum->stat.st_size);
 	ft_print_time(datum);
 	if (!S_ISLNK(datum->stat.st_mode) || (readlink(datum->path, buff_link, 1024) == -1))
-		ft_printf("%s%-s%s\n", color, datum->filename, RESET);
+		ft_printf("%s%-s%s\n", color, datum->filename, rest);
 	else
-		ft_printf("%s%-s%s -> %s\n", color, datum->filename, RESET, buff_link);
+		ft_printf("%s%-s%s -> %s\n", color, datum->filename, rest, buff_link);
 	free(buff_link);
 }
 
