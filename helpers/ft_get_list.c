@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:10:35 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/10 13:17:55 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/10 19:32:54 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static void	ft_error(t_listdir *not_found)
 	ft_merge_sort(not_found, 0, not_found->book.cursor);
 	while (++i <= not_found->book.cursor)
 	{
-		ft_printf("ft_ls: %s: No such file or directory\n", not_found->book.list[i]);
+		ft_dprintf(2, "ft_ls: %s: ",
+			not_found->book.list[i]);
+		perror("");
 	}
 	free_array_list(&(not_found->book));
 }

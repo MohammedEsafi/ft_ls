@@ -6,7 +6,7 @@
 /*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 03:40:55 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/10 17:37:05 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/10 19:33:54 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	size_t	find_max_lenght_of_files(t_listdir *listdir)
 	return (result + 1);
 }
 
-int			*ft_get_parameter(t_listdir *listdir)
+int				*ft_get_parameter(t_listdir *listdir)
 {
 	struct winsize	window;
 	size_t			width_max;
@@ -51,13 +51,14 @@ int			*ft_get_parameter(t_listdir *listdir)
 	return (max_row_col);
 }
 
-int		ft_print_flag_non_list(t_listdir *listdir, int i, t_col *d, char *color)
+int				ft_print_flag_non_list(t_listdir *listdir, int i,
+				t_col *d, char *color)
 {
-	static int 		last_y;
-	static int 		all_av;
+	static int		last_y;
+	static int		all_av;
 	struct winsize	window;
 	t_datum			*datum;
-	static int 		ret;
+	static int		ret;
 
 	datum = (t_datum *)(listdir->book.list[i]);
 	ioctl(1, TIOCGWINSZ, &window);

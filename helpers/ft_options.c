@@ -6,7 +6,7 @@
 /*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 19:24:07 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/09 14:16:13 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/10 19:36:40 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,21 @@ static void		ft_get_opt(char *str, unsigned int *opt)
 	{
 		if (ft_strchr(OPTS, str[i]) == NULL)
 			ft_usage(str[i]);
-		if (str[i] == 'l')
-			*opt = (*opt & ~FLAG_1) | LIST;
-		else if (str[i] == 'R')
-			*opt |= RECURSIVE;
-		else if (str[i] == 'a')
-			*opt |= ALL;
-		else if (str[i] == 'r')
-			*opt |= REVERSE;
-		else if (str[i] == 't')
-			*opt |= TIME;
-		else if (str[i] == 'f')
-			*opt |= FLAG_F;
-		else if (str[i] == 'g')
-			*opt |= FLAG_G;
-		else if (str[i] == 'd')
-			*opt |= FLAG_D;
-		else if (str[i] == '1')
-			*opt = (*opt & ~LIST) | FLAG_1;
-		else if (str[i] == 'G')
-			*opt |= COLOR;
-		else if (str[i] == 'm')
-			*opt |= FLAG_M;
+		(str[i] == 'l') && (*opt = (*opt & ~FLAG_1) | LIST);
+		(str[i] == 'R') && (*opt |= RECURSIVE);
+		(str[i] == 'a') && (*opt |= ALL);
+		(str[i] == 'r') && (*opt |= REVERSE);
+		(str[i] == 't') && (*opt |= TIME);
+		(str[i] == 'f') && (*opt |= FLAG_F);
+		(str[i] == 'g') && (*opt |= FLAG_G);
+		(str[i] == 'd') && (*opt |= FLAG_D);
+		(str[i] == '1') && (*opt = (*opt & ~LIST) | FLAG_1);
+		(str[i] == 'G') && (*opt |= COLOR);
+		(str[i] == 'm') && (*opt |= FLAG_M);
 	}
 }
 
-int	ft_options(unsigned int *options, char **argv, int len)
+int				ft_options(unsigned int *options, char **argv, int len)
 {
 	int	i;
 

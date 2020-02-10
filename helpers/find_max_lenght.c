@@ -6,13 +6,14 @@
 /*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:24:00 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/08 11:58:33 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/10 19:37:51 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
 
-static size_t		*find_max_lenght_second_part(size_t *max_lenght, t_datum *datum)
+static size_t		*find_max_lenght_second_part(size_t *max_lenght,
+		t_datum *datum)
 {
 	size_t		lenght;
 	char		*tmp;
@@ -40,7 +41,7 @@ static size_t		*find_max_lenght_second_part(size_t *max_lenght, t_datum *datum)
 	return (max_lenght);
 }
 
-size_t		*find_max_lenght(t_listdir *listdir, int bulb)
+size_t				*find_max_lenght(t_listdir *listdir, int bulb)
 {
 	t_datum			*datum;
 	struct group	*group_name;

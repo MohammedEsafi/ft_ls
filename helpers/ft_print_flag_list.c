@@ -6,7 +6,7 @@
 /*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 00:15:43 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/10 19:21:27 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/10 19:23:08 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ static void		ft_print_link_usr_grp(t_datum *datum, size_t *max_lenght,
 	ft_printf("%-*s  ", max_lenght[2], group_name->gr_name);
 }
 
-int			ft_print_flag_list(t_listdir *listdir, size_t *max_lenght, int i,
-			char *color)
+int				ft_print_flag_list(t_listdir *listdir, size_t *max_lenght,
+					int i, char *color)
 {
 	t_datum		*datum;
 
