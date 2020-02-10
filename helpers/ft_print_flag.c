@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_flag.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 03:40:55 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/10 13:43:34 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/10 17:37:05 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ int			*ft_get_parameter(t_listdir *listdir)
 	int				number_files;
 
 	max_row_col = (int *)malloc(sizeof(int) * 5);
-	number_files = listdir->book.cursor;
+	number_files = (listdir->book.cursor > 0) ? listdir->book.cursor : 0;
 	ioctl(1, TIOCGWINSZ, &window);
 	width_max = find_max_lenght_of_files(listdir);
-	max_row_col[0] = window.ws_col / width_max;
+	max_row_col[0] = (window.ws_col / width_max > 0) ?
+		window.ws_col / width_max : 1;
 	max_row_col[1] = number_files / max_row_col[0] + 1;
 	max_row_col[2] = width_max;
 	max_row_col[3] = number_files / max_row_col[1];
@@ -66,7 +67,8 @@ int		ft_print_flag_non_list(t_listdir *listdir, int i, t_col *d, char *color)
 	ft_printf("%s%s%s", color, datum->filename, (*listdir->options & COLOR) ?
 			"\033[0m" : "\0");
 	if ((last_y >= (window.ws_row - 1)) &&
-		(d->x == d->max_row_col[3] * d->max_row_col[2]))
+		(d->x == d->max_row_col[3] * d->max_row_col[2])
+			&& i != listdir->book.cursor)
 	{
 		ret = -1;
 		ft_putchar('\n');
