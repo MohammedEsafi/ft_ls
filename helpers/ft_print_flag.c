@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 03:40:55 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/09 23:19:04 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/10 13:43:34 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,8 @@ int		ft_print_flag_non_list(t_listdir *listdir, int i, t_col *d, char *color)
 	ft_putstr_fd(tgoto(tgetstr("cm", NULL), d->x, d->y), 1);
 	ft_printf("%s%s%s", color, datum->filename, (*listdir->options & COLOR) ?
 			"\033[0m" : "\0");
-	if ((last_y == (window.ws_row - 1)) &&
-		(d->x == d->max_row_col[3] * d->max_row_col[2])
-		&& (i != listdir->book.cursor))
+	if ((last_y >= (window.ws_row - 1)) &&
+		(d->x == d->max_row_col[3] * d->max_row_col[2]))
 	{
 		ret = -1;
 		ft_putchar('\n');

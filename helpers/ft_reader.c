@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/09 23:15:37 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/10 14:17:23 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,9 @@ static t_listdir	*new_listdir(char *path, char *filename,
 	{
 		ft_dprintf(2 ,"ft_ls: %s: ", filename);
 		perror("");
+		free(listdir->parent);
+		free(listdir->book.list);
+		ft_strdel((char **)&listdir);
 	}
 	if (dir != NULL)
 		closedir(dir);
@@ -123,6 +126,7 @@ static int			ft_print_listdir(t_listdir *listdir, int bulb)
 
 	i = -1;
 	printed = 0;
+	data.max_row_col = NULL;
 	if (!((LIST | FLAG_G | FLAG_1 | FLAG_M) & *listdir->options))
 		init_t_col(&data, listdir);
 	if ((LIST | FLAG_G) & *listdir->options)
@@ -148,6 +152,8 @@ static int			ft_print_listdir(t_listdir *listdir, int bulb)
 	}
 	if (!((LIST | FLAG_G | FLAG_1) & *listdir->options) && printed != 0)
 		write(1, "\n", 1);
+	if (data.max_row_col != NULL)
+		free(data.max_row_col);
 	return (printed);
 }
 
@@ -169,9 +175,12 @@ int					is_link(char *parent, char *filename)
 	else
 		path = ft_join_path(parent, filename);
 	buff_link = (char *)ft_memalloc(sizeof(char) * 1024);
-	if (readlink(path, buff_link, 1024) == -1)
-		return (1);
+	len  = readlink(path, buff_link, 1024);
+	free(path);
 	lstat(buff_link, &stat);
+	free(buff_link);
+	if (len == -1)
+		return (1);
 	if (S_ISLNK(stat.st_mode))
 		return (0);
 	return (1);
@@ -184,6 +193,8 @@ void				ft_reader(t_listdir *listdir, int bulb)
 	int		printed;
 
 	i = -1;
+	if (listdir == NULL)
+		return ;
 	if (!(FLAG_F & *listdir->options))
 		ft_merge_sort(listdir, 0, listdir->book.cursor);
 	printed = ft_print_listdir(listdir, bulb);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/08 11:00:15 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/10 13:18:49 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@
 # include "libft/stack/stack.h"
 # include "libft/array_list/array_list.h"
 # include <dirent.h>
-// # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/ioctl.h>
 # include <curses.h>

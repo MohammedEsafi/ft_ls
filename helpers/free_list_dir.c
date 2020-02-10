@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 21:46:22 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/03 13:18:16 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/10 13:20:12 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ void	free_list_dir(t_listdir *listdir)
 	{
 		item = listdir->book.list[i];
 		free(item->filename);
+		free(item->path);
 		free(item);
 	}
 	free(listdir->book.list);
+	if (listdir->max_lenght != NULL)
+		free(listdir->max_lenght);
 	free(listdir);
 }
