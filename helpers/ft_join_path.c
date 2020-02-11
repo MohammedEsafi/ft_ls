@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_join_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:28:19 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/11 14:06:01 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/11 20:32:53 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char		*ft_join_path(char *parent, char *child)
 		if (!(full_path = (char *)malloc(p_len + c_len + 2)))
 			return (NULL);
 		ft_memcpy(full_path, parent, p_len);
-		ft_memcpy(full_path + p_len, "/", 3);
+		ft_memcpy(full_path + p_len, "/", 1);
 		ft_memcpy(full_path + p_len + 1, child, c_len + 1);
 	}
 	return (full_path);

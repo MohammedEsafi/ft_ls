@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   append.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 15:31:41 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/11 14:12:21 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/11 19:34:32 by aalhaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		grow_size(t_array_list *arr)
 
 void			append(t_array_list *arr, void *p)
 {
-	if (arr->list == NULL)
+	if (arr->list == NULL || p == NULL)
 		return ;
 	arr->cursor += 1;
 	if (arr->cursor == arr->len)
