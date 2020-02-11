@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 12:37:25 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/02 21:48:49 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/11 09:52:26 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define ARRAY_LIST_H
 
-# define INITIAL_CAPACITY 4
+# define INITIAL_CAPACITY 20
 
 /*
  ** Includes
