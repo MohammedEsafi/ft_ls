@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:10:35 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/10 19:32:54 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/11 09:01:45 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ static void	no_arg_case(t_listdir *listdir)
 	append(&(listdir->book), element);
 }
 
+static void	ft_valid(t_listdir *listdir, t_datum *element, char *str)
+{
+	element->filename = ft_strdup(str);
+	element->path = ft_strdup(str);
+	append(&(listdir->book), element);
+}
+
 void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 {
 	int				i;
@@ -62,11 +69,7 @@ void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 			free(element);
 		}
 		else
-		{
-			element->filename = ft_strdup(argv[i]);
-			element->path = ft_strdup(argv[i]);
-			append(&(listdir->book), element);
-		}
+			ft_valid(listdir, element, argv[i]);
 	}
 	ft_error(&not_found_list);
 }

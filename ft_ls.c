@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:13:56 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/11 09:49:31 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/10 21:22:01 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int		main(int argc, char **argv)
 	t_listdir		*listdir;
 	char			*termtype;
 
-
-termtype = getenv("TERM");
+	termtype = getenv("TERM");
 	tgetent(NULL, termtype);
 	listdir = (t_listdir *)malloc(sizeof(t_listdir));
 	init_array_list(&(listdir->book));

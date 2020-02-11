@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+         #
+#    By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/20 13:51:29 by mesafi            #+#    #+#              #
-#    Updated: 2020/02/08 11:00:30 by aalhaoui         ###   ########.fr        #
+#    Updated: 2020/02/11 09:25:19 by mesafi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,15 @@ OBJS		= ft_ls.o \
 				helpers/ft_join_path.o \
 				helpers/ft_print_flag.o \
 				helpers/cursor_first_pos.o \
-				helpers/ft_get_color.o
+				helpers/ft_get_color.o \
+				helpers/ft_print_file_mode.o \
+				helpers/ft_sort_opt.o \
+				helpers/is_link.o \
+				helpers/ft_print_column.o \
+				helpers/ft_router.o \
+				helpers/ft_print_listdir.o
 CC			= gcc
-CFLAGS		= -ltermcap
+CFLAGS		= -Wextra -Wall -Werror
 
 # Colors
 BLACK		= \033[30m
@@ -62,7 +68,7 @@ $(NAME): $(OBJS) $(HEADER)
 	else \
 		echo "⇾ $(NAME) $(GREEN)updated$(RESET)"; \
 	fi;
-	@gcc $(CFLAGS) $(LIBFT) $(FT_PRINTF) $(OBJS) -o $(NAME)
+	@gcc $(CFLAGS) -ltermcap $(LIBFT) $(FT_PRINTF) $(OBJS) -o $(NAME)
 
 %.o: %.c
 	@$(CC) -c $(CFLAGS) $< -o $@
