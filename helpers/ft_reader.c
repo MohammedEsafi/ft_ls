@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/11 09:39:59 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/11 14:06:28 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static t_listdir	*new_listdir(char *path, char *filename,
 	t_listdir		*listdir;
 	DIR				*dir;
 
-	listdir = (t_listdir *)malloc(sizeof(t_listdir));
+	if (!(listdir = (t_listdir *)malloc(sizeof(t_listdir))))
+		return (NULL);
 	listdir->parent = path;
 	listdir->max_lenght = NULL;
 	listdir->options = p_listdir->options;

@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 19:45:34 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/10 19:46:09 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/11 14:01:14 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void			ft_print_file_mode(t_datum *datum)
 	(mode & S_IWOTH) && (str[8] = 'w');
 	(mode & S_IXOTH) && (str[9] = 'x');
 	(mode & S_ISVTX) && (str[9] = 'T' + ft_case(mode, 3));
-	ft_printf("%s  ", str);
+	ft_printf("%s", str);
 	free(str);
 }

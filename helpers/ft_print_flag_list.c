@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 00:15:43 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/11 09:03:27 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/11 14:10:16 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void		ft_print_size_time_name(t_datum *datum, size_t *max_lenght,
 	char	*rest;
 
 	rest = (*listdir->options & COLOR) ? "\033[0m" : "\0";
-	buff_link = (char *)ft_memalloc(sizeof(char) * 1024);
+	if (!(buff_link = (char *)ft_memalloc(sizeof(char) * 1024)))
+		return ;
 	if (S_ISCHR(datum->stat.st_mode) || S_ISBLK(datum->stat.st_mode))
 	{
 		ft_printf("%*d, ", max_lenght[4], major(datum->stat.st_rdev));

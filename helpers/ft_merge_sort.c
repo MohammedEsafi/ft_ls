@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:01:04 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/11 09:08:21 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/11 14:04:41 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	ft_merge(t_listdir *listdir, int left, int middle, int right)
 	int		l2;
 	int		i;
 
-	temporal = (void **)malloc(sizeof(void *) * (right - left + 1));
+	if (!(temporal = (void **)malloc(sizeof(void *) * (right - left + 1))))
+		return ;
 	l1 = left - 1;
 	l2 = middle;
 	i = -1;

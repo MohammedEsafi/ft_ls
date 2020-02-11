@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:10:35 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/11 09:01:45 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/11 15:10:07 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ static void	no_arg_case(t_listdir *listdir)
 {
 	t_datum			*element;
 
-	element = (t_datum *)malloc(sizeof(t_datum));
+	if (!(element = (t_datum *)malloc(sizeof(t_datum))))
+		exit(1);
 	lstat(".", &(element->stat));
 	element->filename = (char *)malloc(2);
-	ft_memcpy(element->filename, ".", 2);
+	if (!(ft_memcpy(element->filename, ".", 2)))
+		exit(1);
 	append(&(listdir->book), element);
 }
 
@@ -52,7 +54,6 @@ void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 	t_listdir		not_found_list;
 
 	i = -1;
-	listdir->parent = NULL;
 	if (mark < 1 || mark == argc)
 	{
 		no_arg_case(listdir);
@@ -62,7 +63,8 @@ void		ft_get_list(char **argv, int argc, int mark, t_listdir *listdir)
 	not_found_list.options = NULL;
 	while (++i < argc - mark)
 	{
-		element = (t_datum *)malloc(sizeof(t_datum));
+		if (!(element = (t_datum *)malloc(sizeof(t_datum))))
+			continue ;
 		if (lstat(argv[i], &(element->stat)) == -1)
 		{
 			append(&(not_found_list.book), ft_strdup(argv[i]));
