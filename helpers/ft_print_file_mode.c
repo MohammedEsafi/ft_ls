@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 19:45:34 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/11 14:01:14 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/12 17:06:53 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ static int		ft_case(mode_t mode, int i)
 	else if (i == 3 && mode & S_IXOTH)
 		return (32);
 	return (0);
+}
+
+static void		print_permission(char *str, t_datum *datum)
+{
+	acl_t		acl_t;
+
+	ft_printf("%s", str);
+	acl_t = acl_get_link_np(datum->path, 0);
 }
 
 void			ft_print_file_mode(t_datum *datum)
@@ -48,6 +56,6 @@ void			ft_print_file_mode(t_datum *datum)
 	(mode & S_IWOTH) && (str[8] = 'w');
 	(mode & S_IXOTH) && (str[9] = 'x');
 	(mode & S_ISVTX) && (str[9] = 'T' + ft_case(mode, 3));
-	ft_printf("%s", str);
+	print_permission(str, datum);
 	free(str);
 }
