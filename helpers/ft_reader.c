@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reader.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 11:19:51 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/11 20:49:13 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/12 08:08:48 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ static int			ft_checker(t_listdir *listdir, t_datum *datum, int bulb)
 		(LIST & *listdir->options &&
 		S_ISLNK(datum->stat.st_mode) &&
 		datum->filename[ft_strlen(datum->filename) - 1] == '/' &&
-		is_link(listdir->parent, datum->filename))) &&
+		is_link(listdir->parent, datum->filename)) ||
+		(S_ISLNK(datum->stat.st_mode) &&
+		!(LIST & *listdir->options) && bulb)) &&
 		((!ft_strequ(datum->filename, ".") && !ft_strequ(datum->filename, ".."))
 		|| bulb));
 }
@@ -93,14 +95,17 @@ void				ft_reader(t_listdir *listdir, int bulb)
 	if (!(FLAG_F & *listdir->options))
 		ft_merge_sort(listdir, 0, listdir->book.cursor);
 	printed = ft_print_listdir(listdir, bulb);
-	if ((bulb == TRUE || (*(listdir->options) & RECURSIVE)) && !(*listdir->options & FLAG_D))
+	if ((bulb == TRUE || (*(listdir->options) & RECURSIVE)) &&
+		!(*listdir->options & FLAG_D))
 		while (++i <= listdir->book.cursor)
 		{
 			datum = (t_datum *)(listdir->book.list[i]);
 			if (ft_checker(listdir, datum, bulb))
 			{
 				(printed != 0) && ft_printf("\n");
-				ft_reader(new_listdir(ft_join_path(listdir->parent, datum->filename), bulb == TRUE ? "\0" : datum->filename, listdir, bulb), FALSE);
+				ft_reader(new_listdir(ft_join_path(listdir->parent,
+				datum->filename), bulb == TRUE ? "\0" : datum->filename,
+				listdir, bulb), FALSE);
 				printed = 1;
 			}
 		}
