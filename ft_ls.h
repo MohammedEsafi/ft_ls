@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:14:03 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/12 18:41:02 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/12 19:08:05 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # include <pwd.h>
 # include <stdio.h>
 # include <time.h>
+# include <errno.h>
 
 /*
  ** Structures

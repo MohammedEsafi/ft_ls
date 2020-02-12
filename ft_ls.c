@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:13:56 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/12 18:58:18 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/12 19:08:55 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ int		main(int argc, char **argv)
 	listdir->parent = NULL;
 	listdir->max_lenght = NULL;
 	ft_reader(listdir, TRUE);
-	return (0);
+	return (errno > 0 ? 1 : 0);
 }
