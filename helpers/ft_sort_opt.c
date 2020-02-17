@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 09:05:07 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/12 17:59:57 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/15 18:49:45 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	compare_time(t_datum *d1, t_datum *d2, unsigned int opt)
 	int		answer;
 
 	answer = !(opt & REVERSE);
-	if (d1->stat.st_mtime <= d2->stat.st_mtime)
+	if (d1->stat.st_mtime < d2->stat.st_mtime)
 		return (!answer);
-	return (answer);
+	else if (d1->stat.st_mtime > d2->stat.st_mtime)
+		return (answer);
+	else
+		return (compare_string(d1->filename, d2->filename, opt));
 }

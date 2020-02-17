@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 19:45:34 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/12 18:55:48 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/14 08:45:06 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,10 @@ static int		ft_case(mode_t mode, int i)
 static void		print_permission(char *str, t_datum *datum)
 {
 	acl_t		acl;
-	acl_entry_t	dummy;
 	ssize_t		xattr;
 
 	ft_printf("%s", str);
-	acl = acl_get_link_np(datum->path, ACL_TYPE_EXTENDED);
-	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &dummy) == -1)
-	{
-		acl_free(acl);
-		acl = NULL;
-	}
+	acl = acl_get_file(datum->path, ACL_TYPE_EXTENDED);
 	xattr = listxattr(datum->path, NULL, 0, XATTR_NOFOLLOW);
 	if (xattr > 0)
 		ft_printf("@");

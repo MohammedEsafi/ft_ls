@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_max_lenght.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhaoui <aalhaoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:24:00 by mesafi            #+#    #+#             */
-/*   Updated: 2020/02/10 19:37:51 by aalhaoui         ###   ########.fr       */
+/*   Updated: 2020/02/15 18:58:09 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ size_t				*find_max_lenght(t_listdir *listdir, int bulb)
 	}
 	if (max_lenght[3] <= max_lenght[4] + max_lenght[5])
 		max_lenght[3] = max_lenght[4] + max_lenght[5] + 2;
-	if (!bulb)
+	if (!bulb && listdir->book.cursor != -1)
 		ft_printf("total %d\n", max_lenght[6]);
 	return (max_lenght);
 }
