@@ -6,7 +6,7 @@
 /*   By: mesafi <mesafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 03:40:55 by aalhaoui          #+#    #+#             */
-/*   Updated: 2020/02/15 19:54:22 by mesafi           ###   ########.fr       */
+/*   Updated: 2020/02/17 19:24:57 by mesafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int				ft_print_flag_non_list(t_listdir *listdir, int i,
 			"\033[0m" : "\0");
 	if ((last_y >= (window.ws_row - 1)) &&
 		(d->x == d->max_row_col[3] * d->max_row_col[2])
-			&& all_av != listdir->book.cursor + 1)
+			&& all_av < listdir->book.cursor + 1)
 	{
 		ret = -1;
 		ft_putchar('\n');
